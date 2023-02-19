@@ -41,7 +41,7 @@ const EmployeeSchema = new mongoose.Schema(
       required : true
     },
     phone : {
-      type : [Number],
+      type : Number,
       required : true
     },
     dateOfJoining : {

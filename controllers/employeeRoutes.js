@@ -145,7 +145,7 @@ router.post("/create", async (req, res) => {
     console.log(added);
     res.status(201).json({
       success: true,
-      content: added,
+      message: added,
     });
   } catch (error) {
     console.log(error.message);
@@ -157,15 +157,12 @@ router.put("/:aadhar", async (req, res) => {
   try {
     let aadhar = req.params.aadhar;
     aadhar = Number.parseInt(aadhar);
-    const { phone, ...rest } = req.body;
+    // const { phone, ...rest } = req.body;
     // console.log({ phone, rest });
     const updated = await Employee.updateOne(
       { aadharNumber: aadhar },
       {
-        $push: {
-          phone: phone,
-        },
-        $set: rest,
+        $set: req.body,
       }
     ).exec();
     if (updated.matchedCount) {
