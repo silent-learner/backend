@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Employee = require("../models/Employee.js");
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const query = req.query;
     console.log(query);
@@ -20,6 +20,12 @@ router.get("/", async (req, res) => {
       // console.log("else");
       if (query.aadharNumber) {
         query.aadharNumber = Number.parseInt(query.aadharNumber);
+      }
+      if (query.department) {
+        query.department = Number.parseInt(query.department);
+      }
+      if (query.salary) {
+        query.salary = Number.parseInt(query.salary);
       }
       // console.log(query);
       let items = Employee.find({}, { _id: 0, __v: 0 });
@@ -59,7 +65,7 @@ router.get("/", async (req, res) => {
         // console.log("country");
         items.find({ country: { $regex: query.country, $options: "i" } });
       }
-      if (query.dateOfJoining) {
+      if (query.dateOfJoining == 'true') {
         console.log("object");
         console.log({
           start: new Date(new Date(req.body.startingDate).setHours(00, 00, 00)),
@@ -81,7 +87,7 @@ router.get("/", async (req, res) => {
       // console.log(result);
       return res.status(200).json({
         success: true,
-        message: result,
+        items: result,
       });
     }
   } catch (error) {
@@ -90,7 +96,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
   try {
     let {
       name,
