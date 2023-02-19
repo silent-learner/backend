@@ -12,6 +12,7 @@ const companies = [
   "Infosys",
   "Mercedes",
 ];
+
 const country_city = [
   { country: "USA", city: "New York" },
   { country: "USA", city: "Washington Dc" },

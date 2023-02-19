@@ -12,7 +12,7 @@ const EmployeeSchema = new mongoose.Schema(
       unique: true,
     },
     aadharNumber: {
-      type: Number,
+      type: String,
       unique: true,
       required: true,
     },

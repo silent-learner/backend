@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
       }
       if (query.aadharNumber) {
         // console.log("aadharNumber");
-        items.find({ aadharNumber: query.aadharNumber });
+        items.find({ aadharNumber: { $regex: query.aadharNumber, $options: "i" } });
       }
       if (query.company_name) {
         // console.log("company_name");
