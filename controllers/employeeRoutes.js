@@ -116,6 +116,10 @@ router.post("/create", async (req, res) => {
     city = city.toLowerCase();
     address = address.toLowerCase();
     company_name = company_name.toLowerCase();
+    department = Number.parseInt(department);
+    salary = Number.parseInt(salary);
+    phone = Number.parseInt(phone);
+    dateOfJoining = new Date(dateOfJoining)
 
     const item = await Employee.find({ $or: [{ aadharNumber }, { email }] });
     if (item.length != 0) {
@@ -145,7 +149,7 @@ router.post("/create", async (req, res) => {
     console.log(added);
     res.status(201).json({
       success: true,
-      message: added,
+      message: "Item added successfully!!",
     });
   } catch (error) {
     console.log(error.message);
@@ -166,7 +170,7 @@ router.put("/:aadhar", async (req, res) => {
       }
     ).exec();
     if (updated.matchedCount) {
-      res.json({ success: true, message: "Updated" });
+      res.json({ success: true, message: "Item updated Successfully" });
       // console.log(updated,`\nSomeone hit your update endpoint.`)
     } else {
       res.status(400).json({ success: false, message: "Item does not exists" });
