@@ -149,7 +149,7 @@ router.post("/create", async (req, res) => {
     console.log(added);
     res.status(201).json({
       success: true,
-      message: "Item added successfully!!",
+      message: "Employee added successfully!!",
     });
   } catch (error) {
     console.log(error.message);
@@ -161,6 +161,7 @@ router.put("/:aadhar", async (req, res) => {
   try {
     let aadhar = req.params.aadhar;
     aadhar = Number.parseInt(aadhar);
+    console.log(aadhar);
     // const { phone, ...rest } = req.body;
     // console.log({ phone, rest });
     const updated = await Employee.updateOne(
@@ -170,10 +171,10 @@ router.put("/:aadhar", async (req, res) => {
       }
     ).exec();
     if (updated.matchedCount) {
-      res.json({ success: true, message: "Item updated Successfully" });
+      res.json({ success: true, message: "Employee updated Successfully" });
       // console.log(updated,`\nSomeone hit your update endpoint.`)
     } else {
-      res.status(400).json({ success: false, message: "Item does not exists" });
+      res.status(400).json({ success: false, message: "Employee does not exists" });
       // console.log(updated,`\nSomeone hit your update endpoint.`)
     }
     console.log(updated);
@@ -187,13 +188,14 @@ router.delete("/:aadhar", async (req, res) => {
   try {
     let aadhar = req.params.aadhar;
     aadhar = Number.parseInt(aadhar);
+    console.log(aadhar);
 
     const employee = await Employee.findOneAndDelete({ aadharNumber: aadhar });
     if (employee) {
-      res.json({ success: true, message: "Item deleted Successfully" });
+      res.json({ success: true, message: "Employee deleted Successfully" });
       // console.log(item,"\nSomeone hit your delete end point");
     } else {
-      res.status(400).json({ success: false, message: "Item does not exists" });
+      res.status(400).json({ success: false, message: "Employee does not exists" });
     }
   } catch (error) {
     console.log(error.message);
